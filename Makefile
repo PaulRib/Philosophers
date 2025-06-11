@@ -1,10 +1,10 @@
-NAME = PHILO
+NAME = philo
 
-SRC = philo.c
+SRC = philo.c parser.c free_all.c utils.c
 
 OBJS = $(SRC:.c=.o)
 
-FLAGS = -WALL -WEXTRA -WERROR -g
+FLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
