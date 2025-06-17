@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:49:50 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/11 17:43:35 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:30:08 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ struct s_monitor
 	t_philo			*philo;
 };
 
-
-/*Utils*/
-
 void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi_philo(char *nptr);
 int		check_and_parse(t_monitor *monitor, int argc, char **argv);
 int		free_all(t_monitor *monitor);
+void	*jcvd_routine(void *arg);
+int 	start_all_thread(t_monitor *monitor);
+void	*monitoring(void *arg);
 
 #endif

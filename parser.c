@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:19:40 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/11 17:47:25 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:23:08 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static int alloc_all(t_monitor *monitor)
 {
 	monitor->forks = malloc(sizeof(pthread_mutex_t) * monitor->nb_philo);
 	if (!monitor->forks)
-		return (free_all(monitor));
+		return (-1);
 	monitor->philo = malloc(sizeof(t_philo) * monitor->nb_philo);
 	if (!monitor->philo)
-		return (free_all(monitor));
+		return (-1);
 	memset(monitor->philo, 0, sizeof(t_philo));
 	return (0);
 }
@@ -54,9 +54,9 @@ static int	init_all(t_monitor *monitor)
 		monitor->philo[i].right = (i + 1) % monitor->nb_philo;
 		monitor->philo[i].monitor = monitor;
 		pthread_mutex_init(&monitor->forks[i], NULL);
+		pthread_mutex_init(&monitor->philo->meal_mutex, NULL);
 		i++;
 	}
-	pthread_mutex_init(&monitor->philo->meal_mutex, NULL);
 	pthread_mutex_init(&monitor->dead_mutex, NULL);
 	return (0);
 }
@@ -71,7 +71,8 @@ int	check_and_parse(t_monitor *monitor, int argc, char **argv)
 	monitor->time_to_sleep = ft_atoi_philo(argv[4]);
 	if (argc == 6)
 		monitor->nb_must_eat = ft_atoi_philo(argv[5]);
-	else monitor->nb_must_eat = -1;
+	else
+		monitor->nb_must_eat = -1;
 	if (check_all_value(monitor, argc) == -1)
 		return (-1);
 	if (init_all(monitor) == -1)
