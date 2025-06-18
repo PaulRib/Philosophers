@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 14:04:29 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/18 15:13:40 by pribolzi         ###   ########.fr       */
+/*   Created: 2025/06/18 16:43:23 by pribolzi          #+#    #+#             */
+/*   Updated: 2025/06/18 16:46:01 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+long long get_actual_time(void)
 {
-	t_monitor	*monitor;
+	struct timeval	current_time;
+	long long 		time;
 
-	monitor = malloc(sizeof(t_monitor));
-	if (!monitor)
-		return (-1);
-	memset(monitor, 0, sizeof(t_monitor));
-	if (check_and_parse(monitor, argc, argv) == -1)
-	{
-		ft_putstr_fd("Parsing error : only work with 4 or 5 arguments\n", 2);
-		free_all(monitor);
-		return (-1);
-	}
-	// if (start_all_thread(monitor) == -1)
-	// {
-	// 	free_all(monitor);
-	// 	return (-1);
-	// }
+	gettimeofday(&current_time, NULL);
+	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
+	return (time);
 }

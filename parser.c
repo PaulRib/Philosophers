@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:19:40 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/17 16:23:08 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:24:41 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ static int	init_all(t_monitor *monitor)
 		return (-1);
 	while (i < monitor->nb_philo)
 	{
+		memset(&monitor->philo[i], 0, sizeof(t_philo));
 		monitor->philo[i].id = i + 1;
 		monitor->philo[i].left = i;
 		monitor->philo[i].right = (i + 1) % monitor->nb_philo;
 		monitor->philo[i].monitor = monitor;
 		pthread_mutex_init(&monitor->forks[i], NULL);
 		pthread_mutex_init(&monitor->philo->meal_mutex, NULL);
+		pthread_mutex_init(&monitor->philo->full_stomach, NULL);
 		i++;
 	}
 	pthread_mutex_init(&monitor->dead_mutex, NULL);

@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:49:50 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/17 17:30:08 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:24:20 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_philo
 	int				right;
 	long long		last_meal;
 	int				nb_meal;
+	bool			full_meal;
+	pthread_mutex_t full_stomach;
 	pthread_mutex_t	meal_mutex;
 	pthread_t		thread;
 	t_monitor		*monitor;
@@ -44,6 +46,7 @@ struct s_monitor
 	int				nb_must_eat;
 	bool			is_dead;
 	int				finish_eat;
+	long long		start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	dead_mutex;
 	pthread_t 		checker;

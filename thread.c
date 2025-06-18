@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:10:57 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/17 17:29:06 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:48:05 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int start_all_thread(t_monitor *monitor)
 	int	i;
 
 	i = 0;
+	monitor->start = get_actual_time();
 	while (i < monitor->nb_philo)
 	{
+		monitor->philo[i].last_meal = monitor->start;
 		if (pthread_create(&monitor->philo[i].thread, NULL, jcvd_routine,
 			(void *)&monitor->philo[i]) != 0)
 			return (-1);
