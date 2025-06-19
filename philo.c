@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:04:29 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/18 15:13:40 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:01:57 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int argc, char **argv)
 		free_all(monitor);
 		return (-1);
 	}
-	// if (start_all_thread(monitor) == -1)
-	// {
-	// 	free_all(monitor);
-	// 	return (-1);
-	// }
+	if (start_all_thread(monitor) == -1)
+	{
+		free_all(monitor);
+		return (-1);
+	}
 }

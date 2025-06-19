@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:49:50 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/18 17:24:20 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:14:06 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ struct s_monitor
 	long long		start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	dead_mutex;
+	pthread_mutex_t message;
 	pthread_t 		checker;
 	t_philo			*philo;
 };
@@ -60,5 +61,6 @@ int		free_all(t_monitor *monitor);
 void	*jcvd_routine(void *arg);
 int 	start_all_thread(t_monitor *monitor);
 void	*monitoring(void *arg);
+long long get_actual_time(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:21:22 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/11 17:22:41 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:13:41 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,17 @@ int	ft_atoi_philo(char *nptr)
 	if (nptr[i] != '\0')
 		return (-1);
 	return (nb);
+}
+
+void print_action(t_monitor *monitor, t_philo *philo, char *msg)
+{
+	long long	time;
+
+	pthread_mutex_lock(&monitor->message);
+	pthread_mutex_lock(&monitor->dead_mutex);
+	time = get_actual_time() - monitor->start;
+	if (monitor->is_dead == false)
+		printf("%lld %d %s\n", time, philo->id, msg);
+	pthread_mutex_unlock(&monitor->message);
+	pthread_mutex_unlock(&monitor->dead_mutex);
 }
