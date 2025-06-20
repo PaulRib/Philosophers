@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:36:05 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/20 18:35:11 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:26:46 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	update_meal(t_philo *philo, t_monitor *monitor)
 	philo_wait(monitor->time_to_eat);
 }
 
-static void take_fork(t_philo *philo, t_monitor *monitor)
+static void	take_fork(t_philo *philo, t_monitor *monitor)
 {
 	if (philo->id % 2 == 0)
 	{
@@ -43,7 +43,7 @@ static void take_fork(t_philo *philo, t_monitor *monitor)
 	pthread_mutex_unlock(&monitor->forks[philo->right]);
 }
 
-static int check_death(t_monitor *monitor)
+static int	check_death(t_monitor *monitor)
 {
 	pthread_mutex_lock(&monitor->dead_mutex);
 	if (monitor->is_dead == true)
@@ -55,6 +55,25 @@ static int check_death(t_monitor *monitor)
 	return (0);
 }
 
+static void	*routine_alone(t_philo *philo, t_monitor *monitor)
+{
+	pthread_mutex_lock(&monitor->forks[philo->left]);
+	print_action(monitor, philo, "has taken a fork");
+	while (1)
+	{
+		pthread_mutex_lock(&monitor->dead_mutex);
+		if (monitor->is_dead)
+		{
+			pthread_mutex_unlock(&monitor->dead_mutex);
+			pthread_mutex_unlock(&monitor->forks[philo->left]);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&monitor->dead_mutex);
+		usleep(500);
+	}
+	return (NULL);
+}
+
 void	*jcvd_routine(void *arg)
 {
 	t_philo		*philo;
@@ -62,6 +81,8 @@ void	*jcvd_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	monitor = philo->monitor;
+	if (monitor->nb_philo == 1)
+		return (routine_alone(philo, monitor));
 	while (1)
 	{
 		if (check_death(monitor) == -1)

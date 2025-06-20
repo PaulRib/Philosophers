@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:19:40 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/20 18:02:25 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:05:40 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_all_value(t_monitor *monitor, int argc)
 	return (0);
 }
 
-static int alloc_all(t_monitor *monitor)
+static int	alloc_all(t_monitor *monitor)
 {
 	monitor->forks = malloc(sizeof(pthread_mutex_t) * monitor->nb_philo);
 	if (!monitor->forks)
@@ -40,7 +40,7 @@ static int alloc_all(t_monitor *monitor)
 	return (0);
 }
 
-static int	init_all(t_monitor *monitor)
+int	init_all(t_monitor *monitor)
 {
 	int	i;
 
@@ -76,8 +76,6 @@ int	check_and_parse(t_monitor *monitor, int argc, char **argv)
 	else
 		monitor->nb_must_eat = -1;
 	if (check_all_value(monitor, argc) == -1)
-		return (-1);
-	if (init_all(monitor) == -1)
 		return (-1);
 	return (0);
 }

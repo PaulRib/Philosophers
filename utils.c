@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:21:22 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/20 17:02:51 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:06:09 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	while (s[i])
 	{
-		write (fd, &s[i], 1);
+		write(fd, &s[i], 1);
 		i++;
 	}
 }
@@ -54,7 +54,7 @@ int	ft_atoi_philo(char *nptr)
 	return (nb);
 }
 
-void print_action(t_monitor *monitor, t_philo *philo, char *msg)
+void	print_action(t_monitor *monitor, t_philo *philo, char *msg)
 {
 	long long	time;
 

@@ -6,13 +6,13 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:29:14 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/20 18:39:37 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/20 19:05:32 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void check_is_stomach_full(t_monitor *monitor, t_philo *philo)
+static void	check_is_stomach_full(t_monitor *monitor, t_philo *philo)
 {
 	int	i;
 
@@ -27,10 +27,10 @@ static void check_is_stomach_full(t_monitor *monitor, t_philo *philo)
 	}
 }
 
-static bool fill_all_bellies(t_monitor *monitor, t_philo *philo)
+static bool	fill_all_bellies(t_monitor *monitor, t_philo *philo)
 {
 	int	i;
-	int all;
+	int	all;
 
 	i = 0;
 	all = 0;
@@ -45,7 +45,7 @@ static bool fill_all_bellies(t_monitor *monitor, t_philo *philo)
 	return (false);
 }
 
-static bool check_meal(t_monitor *monitor, t_philo *philo)
+static bool	check_meal(t_monitor *monitor, t_philo *philo)
 {
 	if (monitor->nb_must_eat == -1)
 		return (false);
@@ -53,10 +53,10 @@ static bool check_meal(t_monitor *monitor, t_philo *philo)
 	return (fill_all_bellies(monitor, philo));
 }
 
-static bool check_dead(t_philo *philo, t_monitor *monitor)
+static bool	check_dead(t_philo *philo, t_monitor *monitor)
 {
 	long long	current_time;
-	int 		starved;
+	int			starved;
 
 	current_time = get_actual_time();
 	pthread_mutex_lock(&philo->meal_mutex);
@@ -69,7 +69,7 @@ static bool check_dead(t_philo *philo, t_monitor *monitor)
 		pthread_mutex_unlock(&monitor->dead_mutex);
 		pthread_mutex_lock(&monitor->message);
 		printf("%lld %d %s\n", get_actual_time() - monitor->start, philo->id,
-		"died");
+			"died");
 		pthread_mutex_unlock(&monitor->message);
 		return (true);
 	}
