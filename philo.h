@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:49:50 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/19 18:14:06 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:02:20 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_philo
 	long long		last_meal;
 	int				nb_meal;
 	bool			full_meal;
-	pthread_mutex_t full_stomach;
 	pthread_mutex_t	meal_mutex;
 	pthread_t		thread;
 	t_monitor		*monitor;
@@ -54,13 +53,15 @@ struct s_monitor
 	t_philo			*philo;
 };
 
-void	ft_putstr_fd(char *s, int fd);
-int		ft_atoi_philo(char *nptr);
-int		check_and_parse(t_monitor *monitor, int argc, char **argv);
-int		free_all(t_monitor *monitor);
-void	*jcvd_routine(void *arg);
-int 	start_all_thread(t_monitor *monitor);
-void	*monitoring(void *arg);
-long long get_actual_time(void);
+int			free_all(t_monitor *monitor);
+void		*jcvd_routine(void *arg);
+void		*monitoring(void *arg);
+int			check_and_parse(t_monitor *monitor, int argc, char **argv);
+int 		start_all_thread(t_monitor *monitor);
+long long	get_actual_time(void);
+void 		philo_wait(long long time_to);
+void 		print_action(t_monitor *monitor, t_philo *philo, char *msg);
+int			ft_atoi_philo(char *nptr);
+void		ft_putstr_fd(char *s, int fd);
 
 #endif

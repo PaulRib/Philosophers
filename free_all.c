@@ -6,7 +6,7 @@
 /*   By: pribolzi <pribolzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:56:50 by pribolzi          #+#    #+#             */
-/*   Updated: 2025/06/11 17:45:52 by pribolzi         ###   ########.fr       */
+/*   Updated: 2025/06/20 18:02:29 by pribolzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ static void	destroy_all_mutex(t_monitor *monitor)
 	while (i < monitor->nb_philo)
 	{
 		pthread_mutex_destroy(&monitor->forks[i]);
+		if (monitor->philo)
+		{
+			pthread_mutex_destroy(&monitor->philo[i].meal_mutex);
+		}
 		i++;
 	}
-	if (monitor->philo)
-		pthread_mutex_destroy(&monitor->philo->meal_mutex);
 	pthread_mutex_destroy(&monitor->dead_mutex);
 }
 
